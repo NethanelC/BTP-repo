@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac8b2986fe99c84b96a0f8338327bc9, type: 3}
+  m_Name: Rooms
+  m_EditorClassIdentifier: 
+  RoomVariations:
+  - _roomSprite: {fileID: -833224832, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 0
+  - _roomSprite: {fileID: -1738786982, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 1
+  - _roomSprite: {fileID: -2101834382, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 2
+  - _roomSprite: {fileID: 964773040, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 3
+  - _roomSprite: {fileID: 991735429, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 4
+  - _roomSprite: {fileID: -1599238318, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 5
+  - _roomSprite: {fileID: 175070911, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 6
+  - _roomSprite: {fileID: -430411222, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 7
+  - _roomSprite: {fileID: 1401256617, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 8
+  - _roomSprite: {fileID: 1286576165, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 9
+  - _roomSprite: {fileID: 224472937, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 10
+  - _roomSprite: {fileID: -245737269, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 11
+  - _roomSprite: {fileID: -460771515, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 12
+  - _roomSprite: {fileID: 780814389, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 13
+  - _roomSprite: {fileID: 1400924025, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    _roomLayout: 14
