@@ -7,76 +7,118 @@ using static UnityEngine.Random;
 
 public class RoomSpawner : MonoBehaviour
 {
-    [SerializeField] Room _roomPrefab;
-    [SerializeField] LayerMask _roomLayer;
-    Dictionary<bool4, int> _roomLayouts = new();
-    const float _roomSpacing = 1.05f;
-    RoomSpawner() 
+    [SerializeField] private Room _roomPrefab;
+    [SerializeField] private Minimap _miniMap;
+    [SerializeField] private LayerMask _roomLayer;
+    private readonly Dictionary<bool4, int> _roomLayouts = new()
     {
-        _roomLayouts.Add(new bool4(true, true, true, true), 0);
-        _roomLayouts.Add(new bool4(true, false, false, false), 1);
-        _roomLayouts.Add(new bool4(false, true, false, false), 2);
-        _roomLayouts.Add(new bool4(false, false, true, false), 3);
-        _roomLayouts.Add(new bool4(false, false, false, true), 4);
-        _roomLayouts.Add(new bool4(true, false, true, false), 5);
-        _roomLayouts.Add(new bool4(true, true, false, false), 6);
-        _roomLayouts.Add(new bool4(true, false, false, true), 7);
-        _roomLayouts.Add(new bool4(false, true, true, false), 8);
-        _roomLayouts.Add(new bool4(false, true, false, true), 9);
-        _roomLayouts.Add(new bool4(false, false, true, true), 10);
-        _roomLayouts.Add(new bool4(true, true, true, false), 11);
-        _roomLayouts.Add(new bool4(true, false, true, true), 12);
-        _roomLayouts.Add(new bool4(true, true, false, true), 13);
-        _roomLayouts.Add(new bool4(false, true, true, true), 14);
-    }
+        { new (true, true, true, true), 0 },
+        { new (true, false, false, false), 1 },
+        { new (false, true, false, false), 2 },
+        { new (false, false, true, false), 3 },
+        { new (false, false, false, true), 4 },
+        { new (true, false, true, false), 5 },
+        { new (true, true, false, false), 6 },
+        { new (true, false, false, true), 7 },
+        { new (false, true, true, false), 8 },
+        { new (false, true, false, true), 9 },
+        { new (false, false, true, true), 10 },
+        { new (true, true, true, false), 11 },
+        { new (true, false, true, true), 12 },
+        { new (true, true, false, true), 13 },
+        { new (false, true, true, true), 14 }
+    };
+    private const float _roomSpacing = 1.2f, _horizontalSpacing = 26, _verticalSpacing = 16;
     public void ReloadScene()
     {
         SceneManager.LoadScene(0);
     }
-    void Awake()
+    private void Awake()
     {
         SpawnRooms();
     }
-    void SpawnRooms()
+    private void SpawnRooms()
     {
-        Stack<Room> roomCollection = new();
+        Minimap miniMap = Instantiate(_miniMap);
+        Dictionary<Vector2, Room> roomsSpawned = new();
         Vector2 currentRoomPosition = new();
-        while (roomCollection.Count < 10)
+        float up = 0;
+        float down = 0;
+        float left = 0;
+        float right = 0;
+        Room spawnRoom = Instantiate(_roomPrefab, FindValidLocation(ref currentRoomPosition, roomsSpawned), Quaternion.identity);
+        spawnRoom.Init(roomsSpawned.Count, Room.RoomType.Spawn, miniMap);
+        roomsSpawned.Add(currentRoomPosition, spawnRoom);
+        while (roomsSpawned.Count < 9)
         {
-            if (!Physics2D.Raycast(currentRoomPosition, Vector2.zero, _roomSpacing, _roomLayer))
+            Room roomSpawned = Instantiate(_roomPrefab, FindValidLocation(ref currentRoomPosition, roomsSpawned), Quaternion.identity);
+            roomSpawned.Init(roomsSpawned.Count, (Room.RoomType)Range(2, 5), miniMap);
+            roomsSpawned.Add(currentRoomPosition, roomSpawned);
+            if (currentRoomPosition.x > right)
             {
-                roomCollection.Push(Instantiate(_roomPrefab, currentRoomPosition, Quaternion.identity));
+                right = currentRoomPosition.x;
             }
-            currentRoomPosition += _roomSpacing * RandomDirection(Range(0, 4));
+            else if (currentRoomPosition.x < left)
+            {
+                left = currentRoomPosition.x;
+            }
+            if (currentRoomPosition.y > up)
+            {
+                up = currentRoomPosition.y;
+            }
+            else if (currentRoomPosition.y < down)
+            {
+                down = currentRoomPosition.y;
+            }
         }
-        roomCollection.Peek().Init(0, _roomLayouts[CheckNeighbors(roomCollection.Peek().transform.position)], Room.RoomType.Boss);
-        for (int i = 1; i < 10 ; i++)
+        Vector2 roomNormalizePosition = new Vector2((right + left) / _horizontalSpacing, (up + down) / _verticalSpacing) * 0.5f;
+        Room bossRoom = Instantiate(_roomPrefab, FindValidLocation(ref currentRoomPosition, roomsSpawned), Quaternion.identity);
+        bossRoom.Init(roomsSpawned.Count, Room.RoomType.Boss, miniMap);
+        roomsSpawned.Add(currentRoomPosition, bossRoom);
+        foreach (var room in roomsSpawned)
         {
-            roomCollection.Pop();
-            roomCollection.Peek().Init(i, _roomLayouts[CheckNeighbors(roomCollection.Peek().transform.position)], (Room.RoomType)Range(2, 4));
+            room.Value.SetRoomLayout(CheckNeighbors(room.Key, roomsSpawned));
+            miniMap.SpawnRoom(new Vector2(room.Key.x / _horizontalSpacing, room.Key.y / _verticalSpacing) - roomNormalizePosition);
         }
-        roomCollection.Peek().Init(roomCollection.Count, _roomLayouts[CheckNeighbors(roomCollection.Peek().transform.position)], Room.RoomType.Spawn);
     }
-    Vector2 RandomDirection(int randomNumber) 
+    private Vector2 FindValidLocation(ref Vector2 currentLocation, Dictionary<Vector2, Room> dictionary)
     {
-        return randomNumber switch
+        if (!dictionary.ContainsKey(currentLocation))
         {
-            0 => Vector2.down,
-            1 => Vector2.left,
-            2 => Vector2.right,
-            3 => Vector2.up,
-        };
+            return currentLocation;
+        }
+        else
+        {
+            currentLocation += new Vector2(_horizontalSpacing, _verticalSpacing) * RandomDirection(Vector2.zero);
+            return FindValidLocation(ref currentLocation, dictionary);
+        }
     }
-    bool4 CheckNeighbors(Vector2 position)
+    private Vector2 RandomDirection(Vector2 cameFromSide)
     {
-        bool4 yes = new()
+        Dictionary<int, Vector2> directions = new()
         {
-            x = Physics2D.Raycast(position + Vector2.up, Vector2.zero, _roomSpacing, _roomLayer).collider != null,
-            y = Physics2D.Raycast(position + Vector2.down, Vector2.zero, _roomSpacing, _roomLayer).collider != null,
-            z = Physics2D.Raycast(position + Vector2.right, Vector2.zero, _roomSpacing, _roomLayer).collider != null,
-            w = Physics2D.Raycast(position + Vector2.left, Vector2.zero, _roomSpacing, _roomLayer).collider != null
+            {1, Vector2.up },
+            {2, Vector2.down},
+            {3, Vector2.right},
+            {4, Vector2.left},
         };
-        return yes;
+        int randomIndex = Range(0, directions.Count);
+        if(directions[randomIndex] == cameFromSide)
+        {
+            directions.Remove(randomIndex);
+            return directions[Range(0, directions.Count)];
+        }
+        return directions[randomIndex];
     }
-
+    private int CheckNeighbors(Vector2 position, Dictionary<Vector2, Room> dictionary)
+    {
+        bool4 existsOnEachSide = new()
+        {
+            x = dictionary.ContainsKey(position + (Vector2.up * _verticalSpacing)),
+            y = dictionary.ContainsKey(position + (Vector2.down * _verticalSpacing)),
+            z = dictionary.ContainsKey(position + (Vector2.right * _horizontalSpacing)),
+            w = dictionary.ContainsKey(position + (Vector2.left * _horizontalSpacing))
+        };
+        return _roomLayouts[existsOnEachSide];
+    }
 }

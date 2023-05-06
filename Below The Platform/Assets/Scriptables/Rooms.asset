@@ -12,34 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac8b2986fe99c84b96a0f8338327bc9, type: 3}
   m_Name: Rooms
   m_EditorClassIdentifier: 
-  RoomVariations:
-  - _roomSprite: {fileID: -833224832, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 0
-  - _roomSprite: {fileID: -1738786982, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 1
-  - _roomSprite: {fileID: -2101834382, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 2
-  - _roomSprite: {fileID: 964773040, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 3
-  - _roomSprite: {fileID: 991735429, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 4
-  - _roomSprite: {fileID: -1599238318, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 5
-  - _roomSprite: {fileID: 175070911, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 6
-  - _roomSprite: {fileID: -430411222, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 7
-  - _roomSprite: {fileID: 1401256617, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 8
-  - _roomSprite: {fileID: 1286576165, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 9
-  - _roomSprite: {fileID: 224472937, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 10
-  - _roomSprite: {fileID: -245737269, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 11
-  - _roomSprite: {fileID: -460771515, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 12
-  - _roomSprite: {fileID: 780814389, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 13
-  - _roomSprite: {fileID: 1400924025, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
-    _roomLayout: 14
+  RoomLayouts:
+  - RoomSprite: {fileID: -833224832, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 0
+  - RoomSprite: {fileID: -1738786982, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 1
+  - RoomSprite: {fileID: -2101834382, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 2
+  - RoomSprite: {fileID: 964773040, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 3
+  - RoomSprite: {fileID: 991735429, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 4
+  - RoomSprite: {fileID: -1599238318, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 5
+  - RoomSprite: {fileID: 175070911, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 6
+  - RoomSprite: {fileID: -430411222, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 7
+  - RoomSprite: {fileID: 1401256617, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 8
+  - RoomSprite: {fileID: 1286576165, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 9
+  - RoomSprite: {fileID: 224472937, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 10
+  - RoomSprite: {fileID: -245737269, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 11
+  - RoomSprite: {fileID: -460771515, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 12
+  - RoomSprite: {fileID: 780814389, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 13
+  - RoomSprite: {fileID: 1400924025, guid: 923bf538d78f73a419891b4b37d86950, type: 3}
+    RoomLayout: 14
+  RoomTypes:
+  - BaseSprite: {fileID: 21300000, guid: f95f697d66d238446b1ab717def09945, type: 3}
+    CompletedSprite: {fileID: 0}
+  - BaseSprite: {fileID: 0}
+    CompletedSprite: {fileID: 0}

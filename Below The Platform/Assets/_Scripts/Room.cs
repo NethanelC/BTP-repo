@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Room : MonoBehaviour
 {
-    [SerializeField] Rooms _roomsInfo;
-    [SerializeField] SpriteRenderer _spriteRenderer;
-    int _roomIndex;
-    RoomType _roomType;
+    [SerializeField] private Rooms _roomsInfo;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Tilemap _tileMap;
+    [SerializeField] private TileBase _tileToPaint;
+    private Minimap _miniMap;
+    private int _roomIndex;
+    private RoomType _roomType;
     public enum RoomType
     {
         Spawn,
@@ -17,11 +21,11 @@ public class Room : MonoBehaviour
         Puzzle,
         Enemies,
     }
-    public void Init(int roomIndex, int roomLayout, RoomType type)
+    public void Init(int roomIndex, RoomType type, Minimap miniMap)
     {
         _roomIndex = roomIndex;
+        _miniMap = miniMap;
         _roomType = type;
-        _spriteRenderer.sprite = _roomsInfo.RoomVariations[roomLayout]._roomSprite;
         switch (_roomType)
         {
             case RoomType.Spawn:
@@ -39,6 +43,19 @@ public class Room : MonoBehaviour
             case RoomType.Enemies:
                 _spriteRenderer.color = Color.black;
                 break;
-        }   
+        }
+    }
+    public void SetRoomLayout(int roomLayout)
+    {
+        _spriteRenderer.sprite = _roomsInfo.RoomLayouts[roomLayout].RoomSprite;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        _miniMap.ChangeCurrentRoom(_roomIndex, true);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        _miniMap.ChangeCurrentRoom(_roomIndex, false);
+        _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
     }
 }
