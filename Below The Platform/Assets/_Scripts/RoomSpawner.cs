@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -28,7 +27,8 @@ public class RoomSpawner : MonoBehaviour
         { new (true, true, false, true), 13 },
         { new (false, true, true, true), 14 }
     };
-    private const float _roomSpacing = 1.2f, _horizontalSpacing = 26, _verticalSpacing = 16;
+    private const float _roomGapping = 1.2f, _horizontalSpacing = 26, _verticalSpacing = 16;
+    private Vector2 _roomSpacing => new(_horizontalSpacing, _verticalSpacing);
     public void ReloadScene()
     {
         SceneManager.LoadScene(0);
@@ -46,22 +46,16 @@ public class RoomSpawner : MonoBehaviour
         float down = 0;
         float left = 0;
         float right = 0;
-        Room spawnRoom = Instantiate(_roomPrefab, FindValidLocation(ref currentRoomPosition, roomsSpawned), Quaternion.identity);
+        Room spawnRoom = Instantiate(_roomPrefab, currentRoomPosition, Quaternion.identity);
         spawnRoom.Init(roomsSpawned.Count, Room.RoomType.Spawn, miniMap);
         roomsSpawned.Add(currentRoomPosition, spawnRoom);
+        currentRoomPosition += _roomSpacing * GetUnoccupiedSide(currentRoomPosition, roomsSpawned);
         while (roomsSpawned.Count < 9)
         {
-            Room roomSpawned = Instantiate(_roomPrefab, FindValidLocation(ref currentRoomPosition, roomsSpawned), Quaternion.identity);
+            Room roomSpawned = Instantiate(_roomPrefab, currentRoomPosition, Quaternion.identity);
             roomSpawned.Init(roomsSpawned.Count, (Room.RoomType)Range(2, 5), miniMap);
             roomsSpawned.Add(currentRoomPosition, roomSpawned);
-            if (currentRoomPosition.x > right)
-            {
-                right = currentRoomPosition.x;
-            }
-            else if (currentRoomPosition.x < left)
-            {
-                left = currentRoomPosition.x;
-            }
+            currentRoomPosition += _roomSpacing * GetUnoccupiedSide(currentRoomPosition, roomsSpawned);
             if (currentRoomPosition.y > up)
             {
                 up = currentRoomPosition.y;
@@ -70,55 +64,56 @@ public class RoomSpawner : MonoBehaviour
             {
                 down = currentRoomPosition.y;
             }
+            if (currentRoomPosition.x > right)
+            {
+                right = currentRoomPosition.x;
+            }
+            else if (currentRoomPosition.x < left)
+            {
+                left = currentRoomPosition.x;
+            }
         }
-        Vector2 roomNormalizePosition = new Vector2((right + left) / _horizontalSpacing, (up + down) / _verticalSpacing) * 0.5f;
-        Room bossRoom = Instantiate(_roomPrefab, FindValidLocation(ref currentRoomPosition, roomsSpawned), Quaternion.identity);
+        Vector2 roomNormalizePosition = new Vector2(right + left, up + down) / _roomSpacing * 0.5f;
+        Room bossRoom = Instantiate(_roomPrefab, currentRoomPosition, Quaternion.identity);
         bossRoom.Init(roomsSpawned.Count, Room.RoomType.Boss, miniMap);
         roomsSpawned.Add(currentRoomPosition, bossRoom);
         foreach (var room in roomsSpawned)
         {
-            room.Value.SetRoomLayout(CheckNeighbors(room.Key, roomsSpawned));
-            miniMap.SpawnRoom(new Vector2(room.Key.x / _horizontalSpacing, room.Key.y / _verticalSpacing) - roomNormalizePosition);
+            room.Value.SetRoomLayout(_roomLayouts[CheckNeighbors(room.Key, roomsSpawned)]);
+            miniMap.SpawnRoom((room.Key / _roomSpacing) - roomNormalizePosition);
         }
     }
-    private Vector2 FindValidLocation(ref Vector2 currentLocation, Dictionary<Vector2, Room> dictionary)
+    private Vector2 GetUnoccupiedSide(Vector2 currentLocation, Dictionary<Vector2, Room> roomsCollection)
     {
-        if (!dictionary.ContainsKey(currentLocation))
+        Dictionary<int, Vector2> directions = new();
+        bool4 sidesOccupied = CheckNeighbors(currentLocation, roomsCollection);
+        if (!sidesOccupied.x)
         {
-            return currentLocation;
+            directions.Add(directions.Count, Vector2.up);
         }
-        else
+        if (!sidesOccupied.y)
         {
-            currentLocation += new Vector2(_horizontalSpacing, _verticalSpacing) * RandomDirection(Vector2.zero);
-            return FindValidLocation(ref currentLocation, dictionary);
+            directions.Add(directions.Count, Vector2.down);
         }
+        if (!sidesOccupied.z)
+        {
+            directions.Add(directions.Count, Vector2.right);
+        }
+        if (!sidesOccupied.w)
+        {
+            directions.Add(directions.Count, Vector2.left);
+        }
+        return directions[Range(0, directions.Count)];
     }
-    private Vector2 RandomDirection(Vector2 cameFromSide)
-    {
-        Dictionary<int, Vector2> directions = new()
-        {
-            {1, Vector2.up },
-            {2, Vector2.down},
-            {3, Vector2.right},
-            {4, Vector2.left},
-        };
-        int randomIndex = Range(0, directions.Count);
-        if(directions[randomIndex] == cameFromSide)
-        {
-            directions.Remove(randomIndex);
-            return directions[Range(0, directions.Count)];
-        }
-        return directions[randomIndex];
-    }
-    private int CheckNeighbors(Vector2 position, Dictionary<Vector2, Room> dictionary)
+    private bool4 CheckNeighbors(Vector2 position, Dictionary<Vector2, Room> roomsCollection)
     {
         bool4 existsOnEachSide = new()
         {
-            x = dictionary.ContainsKey(position + (Vector2.up * _verticalSpacing)),
-            y = dictionary.ContainsKey(position + (Vector2.down * _verticalSpacing)),
-            z = dictionary.ContainsKey(position + (Vector2.right * _horizontalSpacing)),
-            w = dictionary.ContainsKey(position + (Vector2.left * _horizontalSpacing))
+            x = roomsCollection.ContainsKey(position + (Vector2.up * _verticalSpacing)),
+            y = roomsCollection.ContainsKey(position + (Vector2.down * _verticalSpacing)),
+            z = roomsCollection.ContainsKey(position + (Vector2.right * _horizontalSpacing)),
+            w = roomsCollection.ContainsKey(position + (Vector2.left * _horizontalSpacing))
         };
-        return _roomLayouts[existsOnEachSide];
+        return existsOnEachSide;
     }
 }
