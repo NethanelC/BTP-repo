@@ -16,12 +16,10 @@ public class GameInput : MonoBehaviour
         _playerInput.Player.Shoot.performed += Shoot_performed;
         _playerInput.Player.Pause.performed += Pause_performed;
     }
-
     private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnPauseAction?.Invoke();
     }
-
     private void Shoot_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (Time.timeScale == 1)
@@ -29,7 +27,6 @@ public class GameInput : MonoBehaviour
             OnShootAction?.Invoke(_camera.ScreenToWorldPoint(Input.mousePosition));
         }   
     }
-
     public Vector2 GetMovementVectorNormalized()
     {
         return _playerInput.Player.Movement.ReadValue<Vector2>().normalized;
