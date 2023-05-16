@@ -8,8 +8,6 @@ public class Room : MonoBehaviour
 {
     [SerializeField] private Rooms _roomsInfo;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Tilemap _tileMap;
-    [SerializeField] private TileBase _tileToPaint;
     private Minimap _miniMap;
     private int _roomIndex;
     private RoomType _roomType;

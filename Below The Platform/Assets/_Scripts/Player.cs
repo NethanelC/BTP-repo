@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public GameObject _bullet;
+    public Bullet _bullet;
     [SerializeField] private GameInput _gameInput;
+    [SerializeField] private PlayerHealth _healthSystem;
     private Transform _transform;
     private float _speed = 8;
     void Awake()
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
     }
     private void Shoot(Vector3 mousePosition)
     {
-        Instantiate(_bullet, (Vector2)mousePosition, Quaternion.identity);
+        Instantiate(_bullet, mousePosition, Quaternion.identity);
     }
     private void FixedUpdate()
     {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7505534203906805884}
   - component: {fileID: 5036147914518579960}
   - component: {fileID: 6422638786905447322}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WalkableTileMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3548,9 +3548,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7367883690996525310}
   - component: {fileID: 1943890464838621332}
-  - component: {fileID: 414947187022721497}
-  - component: {fileID: 5747171716069559660}
-  m_Layer: 0
+  - component: {fileID: 4177836151643864906}
+  - component: {fileID: 8266310459889380477}
+  m_Layer: 6
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3625,7 +3625,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &414947187022721497
+--- !u!114 &4177836151643864906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3641,7 +3641,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1943890464838621332}
   _tileMap: {fileID: 5036147914518579960}
   _tileToPaint: {fileID: 11400000, guid: f30a46e48ef5c3c4b8e4674d7bd714cd, type: 2}
---- !u!61 &5747171716069559660
+--- !u!61 &8266310459889380477
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
