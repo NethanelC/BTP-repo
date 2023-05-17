@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;   
 using TMPro;
 
@@ -13,29 +14,36 @@ public class Shop : MonoBehaviour
     private int _gojos => PlayerPrefs.GetInt("Gojos", 0);
     private void Awake()
     {
-        Upgrade.OnUpgradeButtonSelected += Upgrade_OnUpgradeButtonSelected;
+        _currentGojosText.text = _gojos.ToString();
         _purchaseButton.onClick.AddListener(() =>
         {
             PurchaseUpgrade();
         });
+        Upgrade.OnUpgradeSelected += Upgrade_OnUpgradeButtonSelected;  
     }
-    private void OnDisable()
+    private void OnDestroy()
     {
-        Upgrade.OnUpgradeButtonSelected -= Upgrade_OnUpgradeButtonSelected;
+        Upgrade.OnUpgradeSelected -= Upgrade_OnUpgradeButtonSelected;
     }
-    private void Upgrade_OnUpgradeButtonSelected(Upgrade selectedUpgrade)
+    public void Upgrade_OnUpgradeButtonSelected(Upgrade selectedUpgrade)
     {
-        _purchaseButton.interactable = _gojos > selectedUpgrade.Price && !selectedUpgrade.ReachedMaximum;
         _currentSelectedUpgrade = selectedUpgrade;
+        _purchaseButton.interactable = _gojos > selectedUpgrade.Price && !selectedUpgrade.ReachedMaximum;
+        _selectedAbilityPrice.gameObject.SetActive(!selectedUpgrade.ReachedMaximum);
         _selectedAbilityPrice.text = selectedUpgrade.Price.ToString();
-        _selectedAbilityImage.sprite = selectedUpgrade.Icon;
         _selectedAbilityName.text = selectedUpgrade.Name;
         _selectedAbilityDescription.text = selectedUpgrade.Description;
+        _selectedAbilityImage.sprite = selectedUpgrade.Icon;
     }
     private void PurchaseUpgrade()
     {
-        PlayerPrefs.SetInt("Gojos", _gojos - _currentSelectedUpgrade.Price);
         _currentSelectedUpgrade.UpgradeOnce();
+        if (_currentSelectedUpgrade.ReachedMaximum)
+        {
+            _selectedAbilityPrice.gameObject.SetActive(false);
+            _purchaseButton.interactable = false;
+        }
+        PlayerPrefs.SetInt("Gojos", _gojos - _currentSelectedUpgrade.Price);
         _currentGojosText.text = _gojos.ToString();
     }
 }

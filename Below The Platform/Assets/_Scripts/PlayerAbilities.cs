@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerAbilities : MonoBehaviour
 {
     [SerializeField] private GameInput _gameInput;
-    [SerializeField] private AbilityButton[] _abilityButtons = new AbilityButton[5];
-    private readonly Ability[] _abilities = new Ability[5];
+    [SerializeField] private AbilityButton[] _abilityButtons = new AbilityButton[4];
+    private readonly Ability[] _abilities = new Ability[4];
     private readonly Dictionary<Ability,int> _abilityUpgrades = new();
     private void CastAbility(int abilityIndex)
     {

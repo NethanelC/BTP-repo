@@ -5,17 +5,15 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Upgrade : MonoBehaviour, ISelectHandler
+public class Upgrade : MonoBehaviour, IUpdateSelectedHandler
 {
-    public static event Action<Upgrade> OnUpgradeButtonSelected;
-    [SerializeField] private Button _button;
+    public static event Action<Upgrade> OnUpgradeSelected;
     [SerializeField] private Image _icon;
     [Header("Defines upgrade's maximum")]
     [SerializeField] private Image[] _statusImages = new Image[1];
     [SerializeField] private UpgradeKind _upgradeType;
-    [SerializeField] private string _description;
     [SerializeField] private int _initialPrice;
-    public UpgradeKind UpgradeType => _upgradeType;
+    [SerializeField] private string _description;
     public Sprite Icon => _icon.sprite;
     public string Description => _description;
     public string Name => _upgradeType.ToString().Replace("_", " ");
@@ -35,7 +33,8 @@ public class Upgrade : MonoBehaviour, ISelectHandler
         Greed,
         Growth,
         Revival,
-        Destruction
+        Destruction,
+        Soulstone
     }
     private void Awake()
     {
@@ -54,8 +53,8 @@ public class Upgrade : MonoBehaviour, ISelectHandler
         PlayerPrefs.Save();
         _statusImages[UpgradeCounter].color = Color.white;
     }
-    public void OnSelect(BaseEventData eventData)
+    public void OnUpdateSelected(BaseEventData eventData)
     {
-        OnUpgradeButtonSelected?.Invoke(this);
+        OnUpgradeSelected.Invoke(this);
     }
 }

@@ -1,81 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &202860898361077919
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1601641974158213957}
-  - component: {fileID: 4106965864569697337}
-  - component: {fileID: 8164616162220960291}
-  m_Layer: 5
-  m_Name: Image (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1601641974158213957
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202860898361077919}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4295396848538013256}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 15, y: 15}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4106965864569697337
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202860898361077919}
-  m_CullTransparentMesh: 1
---- !u!114 &8164616162220960291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202860898361077919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &3025110371580212879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85,9 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1326039018418132374, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: m_text
-      value: 'Cooldown
-
-'
+      value: Revival
       objectReference: {fileID: 0}
     - target: {fileID: 1326039018601498052, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -108,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 1326039018750994494, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1347760831, guid: d75d4b08525ce2049acc1e5dabeb5175, type: 3}
+      objectReference: {fileID: 294582891, guid: d75d4b08525ce2049acc1e5dabeb5175, type: 3}
     - target: {fileID: 1326039018899793744, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -195,32 +117,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1326039018899793747, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: m_Name
-      value: Cooldown
+      value: Revival
       objectReference: {fileID: 0}
     - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: _description
-      value: Decreases ability cooldowns by 5%
+      value: Acquaint with a guardian angel to revive you at hardships
       objectReference: {fileID: 0}
     - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: _upgradeType
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: _initialPrice
-      value: 50
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: _statusImages.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
       propertyPath: _statusImages.Array.data[1]
       value: 
-      objectReference: {fileID: 8164616162220960291}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
+      propertyPath: _statusImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
+      propertyPath: _statusImages.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
+      propertyPath: _statusImages.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326039018899793756, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
+      propertyPath: _statusImages.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
---- !u!224 &4295396848538013256 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1326039017930864839, guid: 44f2c953817a5ea449eaeb7dbacd806c, type: 3}
-  m_PrefabInstance: {fileID: 3025110371580212879}
-  m_PrefabAsset: {fileID: 0}

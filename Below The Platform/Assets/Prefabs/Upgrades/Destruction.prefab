@@ -341,7 +341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0ccc508108fa6ed4fa11b4a467d7f609, type: 3}
+  m_Sprite: {fileID: -1145403157, guid: d75d4b08525ce2049acc1e5dabeb5175, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -488,10 +488,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b433a9fbb520346ba5417a059d5cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 1326039018899793745}
   _icon: {fileID: 1326039018750994494}
   _statusImages:
   - {fileID: 1326039018601498053}
   _upgradeType: 10
+  _initialPrice: 600
   _description: Destroys everything in the current room
-  _initialPrice: 500
