@@ -40,5 +40,5 @@ public abstract class Damageable : MonoBehaviour
             Die();
         }
     }
-    protected abstract void Die();
+    public abstract void Die();
 }

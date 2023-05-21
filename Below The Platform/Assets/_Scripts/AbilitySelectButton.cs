@@ -1,30 +1,19 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class AbilitySelectButton : MonoBehaviour
+public class AbilitySelectButton : MonoBehaviour, IPointerClickHandler
 {
-    public static event Action<Ability> OnAbilityUpgrade, OnAbilityBanished;
-    [SerializeField] private Button _button;
-    [SerializeField] private Image _abilityIcon;
+    [SerializeField] private AbilitySelectMenu _abilityMenu;
+    [SerializeField] private Image _abilityIcon, _background;
     [SerializeField] private TextMeshProUGUI _abilityName, _abilityDescription, _abilityLevelText;
+    [SerializeField] private GameObject _passiveActiveText;
     [SerializeField] private Ability.AbilityTemplate _currencyTemplate;
+    [SerializeField] private Color _normalColor, _banishColor;
     private Ability _abilityToSelect;
-    private void Awake()
-    {
-        _button.onClick.AddListener(() =>
-        {
-            if (AbilitySelectMenu.IsBanishMode)
-            {
-                OnAbilityBanished?.Invoke(_abilityToSelect);
-                return;
-            }
-            OnAbilityUpgrade?.Invoke(_abilityToSelect);
-        });
-    }
     public void ChangeButtonUI(Ability newAbilityToBeSelected, int abilityLevel)
     {
         _abilityToSelect = newAbilityToBeSelected;
@@ -32,13 +21,27 @@ public class AbilitySelectButton : MonoBehaviour
         _abilityName.text = newAbilityToBeSelected.AbilityVisuals.name;
         _abilityDescription.text = newAbilityToBeSelected.AbilityVisuals.description;
         _abilityLevelText.text = abilityLevel == 0? "NEW!" : $"Lvl. {abilityLevel}";
+        _passiveActiveText.SetActive(!newAbilityToBeSelected.IsActiveAbility);
     }
     public void NonAbility()
     {
-        _button.onClick.RemoveAllListeners();
+        _abilityToSelect = null;
+        _abilityLevelText.text = null;
         _abilityIcon.sprite = _currencyTemplate.sprite;
         _abilityName.text = _currencyTemplate.name;
-        _abilityDescription.text = _currencyTemplate.description;
-        _abilityLevelText.text = null;
+        _abilityDescription.text = _currencyTemplate.description.Replace("_", Mathf.RoundToInt(20 + (20 * PlayerStats.Instance.Greed)).ToString());
+        _passiveActiveText.SetActive(false);
+    }
+    public void ToggleBanish(bool isBanish)
+    {
+        if(!_abilityToSelect)
+        {
+            return;
+        }
+        _background.color = isBanish ? _banishColor : _normalColor;
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+       _abilityMenu.AbilityChosen(_abilityToSelect);    
     }
 }

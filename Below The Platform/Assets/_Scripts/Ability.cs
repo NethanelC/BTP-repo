@@ -10,6 +10,8 @@ public abstract class Ability : MonoBehaviour
     [Header("Details")]
     [SerializeField] private int _maximumLevel;
     [SerializeField] private float _cooldown;
+    [SerializeField] private bool _isActiveAbility;
+    public bool IsActiveAbility => _isActiveAbility;
     public int MaximumLevel => _maximumLevel; 
     public float Cooldown => _cooldown;
     public AbilityTemplate AbilityVisuals => _abilityVisuals;

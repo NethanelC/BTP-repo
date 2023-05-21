@@ -52,6 +52,7 @@ MonoBehaviour:
     description: bullet woww
   _maximumLevel: 5
   _cooldown: 2
+  _isActiveAbility: 1
   _collider: {fileID: 0}
   _damageType: 0
   _criticalChance: 0.5

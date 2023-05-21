@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,50 +10,74 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentGojosText, _buyOrStartText, _nameText, _descriptionText, _priceText;
     [SerializeField] private Image _characterIcon;
     [SerializeField] private Button _buyAndStartButton;
-    [Space(10)]
-    [SerializeField] private TextMeshProUGUI _health, _armor;
-    private Character _currentSelectedCharacter;
+    [Space(5)]
+    [SerializeField] private TextMeshProUGUI _armor, _health, _power, _cooldown, _movespeed, _speed, _luck, _greed, _growth, _reroll, _skip, _banish;
     private int _gojos => PlayerPrefs.GetInt("Gojos", 0);
     private void Awake()
     {
         _currentGojosText.text = _gojos.ToString();
-        Character.OnCharacterSelected += Character_OnCharacterSelected;      
+        CharacterButton.OnCharacterSelected += Character_OnCharacterSelected;      
     }
     private void OnDestroy()
     {
-        Character.OnCharacterSelected -= Character_OnCharacterSelected;       
+        CharacterButton.OnCharacterSelected -= Character_OnCharacterSelected;       
     }
-    private void Character_OnCharacterSelected(Character selectedCharacter)
+    public void SelectNewButton(CharacterButton selectedButton)
     {
-        _buyAndStartButton.interactable = selectedCharacter.IsUnlocked || selectedCharacter.Price > _gojos;
-        _buyOrStartText.text = selectedCharacter.IsUnlocked ? "Start" : "Buy";
-        _priceText.gameObject.SetActive(!selectedCharacter.IsUnlocked);
-        _currentSelectedCharacter = selectedCharacter;
-        _priceText.text = selectedCharacter.Price.ToString();
-        _characterIcon.sprite = selectedCharacter.Icon;
-        _nameText.text = selectedCharacter.Name;
-        _descriptionText.text = selectedCharacter.Description;
+        _buyAndStartButton.interactable = selectedButton.IsUnlocked || selectedButton.Price > _gojos;
+        _buyOrStartText.text = selectedButton.IsUnlocked ? "Start" : "Buy";
+        _priceText.gameObject.SetActive(!selectedButton.IsUnlocked);
+        _priceText.text = selectedButton.Price.ToString();
+        _characterIcon.sprite = selectedButton.Icon;
+        _descriptionText.text = selectedButton.Description;
         _buyAndStartButton.onClick.RemoveAllListeners();
         _buyAndStartButton.onClick.AddListener(() =>
         {
-            if(selectedCharacter.IsUnlocked)
+            if(selectedButton.IsUnlocked)
             {
-                StartGame();
+                //START GAME
+                LevelsManager.LoadLevel();
             }
             else
             {
-                PurchaseCharacter();
+                //PURCHASE CHARACTER
+                PlayerPrefs.SetInt("Gojos", _gojos - selectedButton.Price);
+                selectedButton.UnlockCharacter();
+                _currentGojosText.text = _gojos.ToString();
             }    
         });
     }
-    private void StartGame()
+    private void Character_OnCharacterSelected(Character selectedCharacter)
     {
-        LevelsManager.LoadLevel();
+        _nameText.text = selectedCharacter.name;
+        _health.text = selectedCharacter.Health.ToString();
+        _armor.text = GetStringFromStat(selectedCharacter.Armor);
+        _reroll.text = GetStringFromStat(selectedCharacter.Rerolls);
+        _skip.text = GetStringFromStat(selectedCharacter.Skips);
+        _banish.text = GetStringFromStat(selectedCharacter.Banishes);
+
+        _cooldown.text = GetStringFromStat(selectedCharacter.Cooldown).Replace("+", "-");
+        _power.text = GetStringFromStat(selectedCharacter.Power);
+        _movespeed.text = GetStringFromStat(selectedCharacter.MoveSpeed);
+        _speed.text = GetStringFromStat(selectedCharacter.Speed);
+        _greed.text = GetStringFromStat(selectedCharacter.Greed);
+        _growth.text = GetStringFromStat(selectedCharacter.Growth);
+        _luck.text = GetStringFromStat(selectedCharacter.Luck);
     }
-    private void PurchaseCharacter()
+    private string GetStringFromStat(float selectedStat)
     {
-        PlayerPrefs.SetInt("Gojos", _gojos - _currentSelectedCharacter.Price);
-        _currentSelectedCharacter.UnlockCharacter();
-        _currentGojosText.text = _gojos.ToString();
+        if (selectedStat == 0)
+        {
+            return "-";
+        }
+        return $"+{selectedStat * 100}%";
+    }
+    private string GetStringFromStat(int selectedStat)
+    {
+        if (selectedStat == 0)
+        {
+            return "-";
+        }
+        return $"+{selectedStat}";
     }
 }

@@ -50,6 +50,7 @@ MonoBehaviour:
     description: diamante
   _maximumLevel: 2
   _cooldown: 2
+  _isActiveAbility: 1
   _collider: {fileID: 0}
   _damageType: 0
   _criticalChance: 0

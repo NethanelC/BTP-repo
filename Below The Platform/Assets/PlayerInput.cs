@@ -89,6 +89,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DestructionAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""fca72b1a-a0fc-4d02-a03b-d4fe30b6352b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DashAbility"",
+                    ""type"": ""Button"",
+                    ""id"": ""f98806d1-1c04-4339-bcd5-2168dc445f16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,7 +225,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""id"": ""b9a70996-e9f3-44f8-935e-2e6e31b22a66"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
@@ -249,7 +267,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""df0238d5-2813-43a7-a5f8-4ad55bf8bcaa"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirstAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f692ea58-5513-4106-8fbf-d7f58ba37e1b"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -260,7 +289,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9b46a599-5d96-4783-ba35-76e210727578"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""307f3b3a-c71b-4a23-8073-2f63547502b4"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -271,7 +311,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e4c5f427-f5e2-4140-b19a-ce229bc62f55"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThirdAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""832b30c5-7e0a-4e7b-a6b1-7121b7d2289a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -282,11 +333,66 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d9c6fc12-fa45-4bd4-a0e4-9053d306c829"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""FourthAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07e140c7-d520-4a77-a0e2-46e059600a4d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FourthAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9f8ef5d-d042-4962-bc69-4c2a2212d8e2"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DestructionAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72b08deb-c15f-4a13-8a51-94a55d88a9fc"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DestructionAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09aa60c5-cfad-4194-a983-3c933aed03a4"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashAbility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b85338b5-c8ab-466c-85d8-5d2c8afdf3b0"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DashAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -304,6 +410,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_SecondAbility = m_Player.FindAction("SecondAbility", throwIfNotFound: true);
         m_Player_ThirdAbility = m_Player.FindAction("ThirdAbility", throwIfNotFound: true);
         m_Player_FourthAbility = m_Player.FindAction("FourthAbility", throwIfNotFound: true);
+        m_Player_DestructionAbility = m_Player.FindAction("DestructionAbility", throwIfNotFound: true);
+        m_Player_DashAbility = m_Player.FindAction("DashAbility", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +480,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SecondAbility;
     private readonly InputAction m_Player_ThirdAbility;
     private readonly InputAction m_Player_FourthAbility;
+    private readonly InputAction m_Player_DestructionAbility;
+    private readonly InputAction m_Player_DashAbility;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -383,6 +493,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SecondAbility => m_Wrapper.m_Player_SecondAbility;
         public InputAction @ThirdAbility => m_Wrapper.m_Player_ThirdAbility;
         public InputAction @FourthAbility => m_Wrapper.m_Player_FourthAbility;
+        public InputAction @DestructionAbility => m_Wrapper.m_Player_DestructionAbility;
+        public InputAction @DashAbility => m_Wrapper.m_Player_DashAbility;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -413,6 +525,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @FourthAbility.started += instance.OnFourthAbility;
             @FourthAbility.performed += instance.OnFourthAbility;
             @FourthAbility.canceled += instance.OnFourthAbility;
+            @DestructionAbility.started += instance.OnDestructionAbility;
+            @DestructionAbility.performed += instance.OnDestructionAbility;
+            @DestructionAbility.canceled += instance.OnDestructionAbility;
+            @DashAbility.started += instance.OnDashAbility;
+            @DashAbility.performed += instance.OnDashAbility;
+            @DashAbility.canceled += instance.OnDashAbility;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -438,6 +556,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @FourthAbility.started -= instance.OnFourthAbility;
             @FourthAbility.performed -= instance.OnFourthAbility;
             @FourthAbility.canceled -= instance.OnFourthAbility;
+            @DestructionAbility.started -= instance.OnDestructionAbility;
+            @DestructionAbility.performed -= instance.OnDestructionAbility;
+            @DestructionAbility.canceled -= instance.OnDestructionAbility;
+            @DashAbility.started -= instance.OnDashAbility;
+            @DashAbility.performed -= instance.OnDashAbility;
+            @DashAbility.canceled -= instance.OnDashAbility;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -464,5 +588,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSecondAbility(InputAction.CallbackContext context);
         void OnThirdAbility(InputAction.CallbackContext context);
         void OnFourthAbility(InputAction.CallbackContext context);
+        void OnDestructionAbility(InputAction.CallbackContext context);
+        void OnDashAbility(InputAction.CallbackContext context);
     }
 }

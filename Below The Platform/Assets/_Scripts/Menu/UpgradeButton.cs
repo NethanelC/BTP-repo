@@ -5,9 +5,9 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Upgrade : MonoBehaviour, IUpdateSelectedHandler
+public class UpgradeButton : MonoBehaviour, IUpdateSelectedHandler
 {
-    public static event Action<Upgrade> OnUpgradeSelected;
+    [SerializeField] private Shop _shop;
     [SerializeField] private Image _icon;
     [Header("Defines upgrade's maximum")]
     [SerializeField] private Image[] _statusImages = new Image[1];
@@ -55,6 +55,6 @@ public class Upgrade : MonoBehaviour, IUpdateSelectedHandler
     }
     public void OnUpdateSelected(BaseEventData eventData)
     {
-        OnUpgradeSelected.Invoke(this);
+        _shop.SelectUpgradeButton(this);
     }
 }

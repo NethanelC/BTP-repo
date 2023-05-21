@@ -8,12 +8,13 @@ using TMPro;
 public class PlayerExperience : MonoBehaviour
 {
     public static PlayerExperience Instance { get; private set; }
-    public event Action<int> OnLevelUp;
+    public event Action OnLevelUp;
     [SerializeField] private Slider _progressSlider;
     [SerializeField] private TextMeshProUGUI _percentInText, _levelInText;
     [SerializeField] private ExperiencePopup _popup;
-    private int _currentExperience, _currentLevel;
-    public int ExperienceRequiredToLevelUp => _currentLevel * 3;
+    private int _currentLevel;
+    private float _currentExperience;
+    public int RequiredExperienceToLevelUp => _currentLevel * 3;
     private void Awake()
     {
         if (Instance == null)
@@ -22,23 +23,27 @@ public class PlayerExperience : MonoBehaviour
         }
         else
         {
-            Destroy(Instance);
+            Destroy(this);
         }
         _levelInText.text = $"Lvl. {++_currentLevel}";
     }
     public void AcquireExperience(int expPoints)
     {
-        _currentExperience += expPoints;
+        _currentExperience += expPoints + (expPoints * PlayerStats.Instance.Growth);
         var popUp = Instantiate(_popup,transform.position, Quaternion.identity).Init(expPoints);
-        if (_currentExperience >= ExperienceRequiredToLevelUp)
+        if (_currentExperience >= RequiredExperienceToLevelUp)
         {
-            _currentExperience -= ExperienceRequiredToLevelUp;
-            _levelInText.text = $"Lvl. {++_currentLevel}";
-            OnLevelUp?.Invoke(_currentLevel);
-            /*AudioSource.PlayClipAtPoint()*/ //sound play
+            LevelUp();
         }
-        float percent = (float)_currentExperience / ExperienceRequiredToLevelUp;
+        float percent = _currentExperience / RequiredExperienceToLevelUp;
         _progressSlider.value = percent;
         _percentInText.text = $"{Mathf.Round(percent * 100)} %";
+    }
+    private void LevelUp()
+    {
+        _currentExperience -= RequiredExperienceToLevelUp;
+        _levelInText.text = $"Lvl. {++_currentLevel}";
+        OnLevelUp?.Invoke();
+        /*AudioSource.PlayClipAtPoint()*/ //sound play
     }
 }

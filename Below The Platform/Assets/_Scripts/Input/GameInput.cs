@@ -7,8 +7,10 @@ public class GameInput : MonoBehaviour
 {
     public event Action<Vector3> OnShootAction;
     public event Action OnPauseAction;
+    public event Action OnDestructionAction;
+    public event Action OnDashAction;
     public event Action<int> OnAbilityAction;
-    [SerializeField] private Camera _camera;
+    [SerializeField] private Camera _camera;   
     private PlayerInput _playerInput;
     private void Awake()
     {
@@ -20,6 +22,34 @@ public class GameInput : MonoBehaviour
         _playerInput.Player.SecondAbility.performed += SecondAbility_performed;
         _playerInput.Player.ThirdAbility.performed += ThirdAbility_performed;
         _playerInput.Player.FourthAbility.performed += FourthAbility_performed;
+        _playerInput.Player.DestructionAbility.performed += DestructionAbility_performed;
+        _playerInput.Player.DashAbility.performed += DashAbility_performed;
+        AbilitySelectMenu.OnMenuClosed += EnableInput;
+    }
+    private void DashAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnDashAction?.Invoke();
+    }
+    private void DestructionAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnDestructionAction?.Invoke();
+    }
+    private void Start()
+    {
+        PlayerExperience.Instance.OnLevelUp += DisableInput;
+    }
+    private void OnDestroy()
+    {
+        PlayerExperience.Instance.OnLevelUp -= DisableInput;
+        AbilitySelectMenu.OnMenuClosed -= EnableInput;
+    }
+    private void DisableInput()
+    {
+        _playerInput.Disable();
+    }
+    private void EnableInput()
+    {
+        _playerInput.Enable();
     }
     private void FirstAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
@@ -43,10 +73,7 @@ public class GameInput : MonoBehaviour
     }
     private void Shoot_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (Time.timeScale == 1)
-        {
-            OnShootAction?.Invoke(_camera.ScreenToWorldPoint(Input.mousePosition));
-        }   
+        OnShootAction?.Invoke(_camera.ScreenToWorldPoint(Input.mousePosition));
     }
     public Vector2 GetMovementVectorNormalized()
     {

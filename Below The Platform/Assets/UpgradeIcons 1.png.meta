@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d75d4b08525ce2049acc1e5dabeb5175
+guid: 1e3897ee245d36f4fa6ab4396a5bf23a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,7 +44,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -68,7 +68,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UpgradeIcons_0
+      name: UpgradeIcons 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaa28698887493242ae6586eb699cd93
-      internalID: -1947598977
+      spriteID: 1bc25f85d9eb473428ed1426cee031d8
+      internalID: 1638408598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_1
+      name: UpgradeIcons 1_1
       rect:
         serializedVersion: 2
         x: 50
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50eef4feda523e54da432b5f7663b061
-      internalID: 1500423546
+      spriteID: 53dda4e6dc024cd49950c6e48945d1fc
+      internalID: 1530570569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_2
+      name: UpgradeIcons 1_2
       rect:
         serializedVersion: 2
         x: 100
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 394e0a6e945afa34c9e4e85a8650bc9d
-      internalID: -154576230
+      spriteID: 8dc6331a47cfd724b872a176a5c41964
+      internalID: 858035825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_3
+      name: UpgradeIcons 1_3
       rect:
         serializedVersion: 2
         x: 150
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e29c493af4c3b294fb47451937ae608c
-      internalID: -1347760831
+      spriteID: b06af2a0c4625f146a76d757ce0e240e
+      internalID: 597791521
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_4
+      name: UpgradeIcons 1_4
       rect:
         serializedVersion: 2
         x: 200
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a0355a08c77e5c4f8277bb2a815c367
-      internalID: 1914996625
+      spriteID: 654eaa6d0ec40654b9c28cabb1da7008
+      internalID: 543445122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_5
+      name: UpgradeIcons 1_5
       rect:
         serializedVersion: 2
         x: 250
@@ -236,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0808836c5458cbc4c89e0d0bf22d7d41
-      internalID: 1523221254
+      spriteID: b258c62f8615426448ce24759571ae5f
+      internalID: 1488563530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_6
+      name: UpgradeIcons 1_6
       rect:
         serializedVersion: 2
         x: 300
@@ -257,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 704b80ff5b4fa6c448b0f60c6e4f6f24
-      internalID: -1312746996
+      spriteID: b66c15afff65fc6458a6b78f4909485e
+      internalID: -1708217787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_7
+      name: UpgradeIcons 1_7
       rect:
         serializedVersion: 2
         x: 350
@@ -278,14 +278,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b638aaf1d5c961f4a9cdc1e7599dc90c
-      internalID: -859984187
+      spriteID: 537b648748df4ce45b65779c414b4134
+      internalID: 647817248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_8
+      name: UpgradeIcons 1_8
       rect:
         serializedVersion: 2
         x: 400
@@ -299,14 +299,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa14f29f80a8eed4ea2e4f36d54947f4
-      internalID: -740793919
+      spriteID: 6ec466d72c9275b44ba3bb6ae4499c18
+      internalID: 1728204902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_9
+      name: UpgradeIcons 1_9
       rect:
         serializedVersion: 2
         x: 450
@@ -320,14 +320,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e7c8bd9c0132ff4f9a28a77b3e7ef39
-      internalID: 294582891
+      spriteID: a174a703790e2c94fa8052c704ac692e
+      internalID: 898153750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_10
+      name: UpgradeIcons 1_10
       rect:
         serializedVersion: 2
         x: 500
@@ -341,14 +341,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 686a5f47a15f5b24e81776639277183e
-      internalID: -1145403157
+      spriteID: 2def72e967a7f9f4f83faf80ae7c9bc1
+      internalID: -1596043731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpgradeIcons_11
+      name: UpgradeIcons 1_11
       rect:
         serializedVersion: 2
         x: 550
@@ -362,8 +362,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54e72a54dd418784fb04c3399904277c
-      internalID: -1675706002
+      spriteID: 4a7195a9e6ffa8340bf411104b24cb98
+      internalID: 1728429294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcons 1_12
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a958db2e7b7b2064cab01bbb3b8b1fc2
+      internalID: 947380122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcons 1_13
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a23efd1a306a644b8c255470075efe7
+      internalID: 995157536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeIcons 1_14
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 0
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23f44ec512a5f76499c1dcd4811d0501
+      internalID: -235334618
       vertices: []
       indices: 
       edges: []
@@ -379,18 +442,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UpgradeIcons_0: -1947598977
-      UpgradeIcons_1: 1500423546
-      UpgradeIcons_10: -1145403157
-      UpgradeIcons_11: -1675706002
-      UpgradeIcons_2: -154576230
-      UpgradeIcons_3: -1347760831
-      UpgradeIcons_4: 1914996625
-      UpgradeIcons_5: 1523221254
-      UpgradeIcons_6: -1312746996
-      UpgradeIcons_7: -859984187
-      UpgradeIcons_8: -740793919
-      UpgradeIcons_9: 294582891
+      UpgradeIcons 1_0: 1638408598
+      UpgradeIcons 1_1: 1530570569
+      UpgradeIcons 1_10: -1596043731
+      UpgradeIcons 1_11: 1728429294
+      UpgradeIcons 1_12: 947380122
+      UpgradeIcons 1_13: 995157536
+      UpgradeIcons 1_14: -235334618
+      UpgradeIcons 1_2: 858035825
+      UpgradeIcons 1_3: 597791521
+      UpgradeIcons 1_4: 543445122
+      UpgradeIcons 1_5: 1488563530
+      UpgradeIcons 1_6: -1708217787
+      UpgradeIcons 1_7: 647817248
+      UpgradeIcons 1_8: 1728204902
+      UpgradeIcons 1_9: 898153750
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
