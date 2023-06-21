@@ -11,20 +11,23 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] private Image _characterIcon;
     [SerializeField] private Button _buyAndStartButton;
     [Space(5)]
-    [SerializeField] private TextMeshProUGUI _armor, _health, _power, _cooldown, _movespeed, _speed, _luck, _greed, _growth, _reroll, _skip, _banish;
+    [SerializeField] private TextMeshProUGUI _armor, _health, _power, _cooldown, _movespeed, _speed, _luck, _greed, _growth, _reroll, _skip, _banish, _revival, _soulstone, _destruction;
     private int _gojos => PlayerPrefs.GetInt("Gojos", 0);
     private void Awake()
     {
         _currentGojosText.text = _gojos.ToString();
-        CharacterButton.OnCharacterSelected += Character_OnCharacterSelected;      
     }
-    private void OnDestroy()
+    private void OnEnable()
     {
-        CharacterButton.OnCharacterSelected -= Character_OnCharacterSelected;       
+        CharacterButton.OnCharacterSelected += Character_OnCharacterSelected;            
+    }
+    private void OnDisable()
+    {
+        CharacterButton.OnCharacterSelected -= Character_OnCharacterSelected;             
     }
     public void SelectNewButton(CharacterButton selectedButton)
     {
-        _buyAndStartButton.interactable = selectedButton.IsUnlocked || selectedButton.Price > _gojos;
+        _buyAndStartButton.interactable = selectedButton.IsUnlocked || selectedButton.Price < _gojos;
         _buyOrStartText.text = selectedButton.IsUnlocked ? "Start" : "Buy";
         _priceText.gameObject.SetActive(!selectedButton.IsUnlocked);
         _priceText.text = selectedButton.Price.ToString();
@@ -55,6 +58,9 @@ public class CharacterSelection : MonoBehaviour
         _reroll.text = GetStringFromStat(selectedCharacter.Rerolls);
         _skip.text = GetStringFromStat(selectedCharacter.Skips);
         _banish.text = GetStringFromStat(selectedCharacter.Banishes);
+        _revival.text = GetStringFromStat(selectedCharacter.Revivals);
+        _soulstone.text = GetStringFromStat(selectedCharacter.Soulstones);
+        _destruction.text = GetStringFromStat(selectedCharacter.Destructions);
 
         _cooldown.text = GetStringFromStat(selectedCharacter.Cooldown).Replace("+", "-");
         _power.text = GetStringFromStat(selectedCharacter.Power);
@@ -66,18 +72,10 @@ public class CharacterSelection : MonoBehaviour
     }
     private string GetStringFromStat(float selectedStat)
     {
-        if (selectedStat == 0)
-        {
-            return "-";
-        }
-        return $"+{selectedStat * 100}%";
+        return selectedStat == 0? "-" : $"{selectedStat * 100}%";
     }
     private string GetStringFromStat(int selectedStat)
     {
-        if (selectedStat == 0)
-        {
-            return "-";
-        }
-        return $"+{selectedStat}";
+        return selectedStat == 0 ? "-" : $"+{selectedStat}";
     }
 }

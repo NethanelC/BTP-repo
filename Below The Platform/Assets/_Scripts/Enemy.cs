@@ -12,7 +12,7 @@ public class Enemy : Damageable
     }
     public override void Die()
     {
-        PlayerExperience.Instance.AcquireExperience(_expPoints);
+        PlayerExperience.Instance.Experience = _expPoints;
         _room.EnemyDied();
         Destroy(gameObject);
     }

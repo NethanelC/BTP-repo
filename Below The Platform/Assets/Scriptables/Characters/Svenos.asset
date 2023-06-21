@@ -18,8 +18,8 @@ MonoBehaviour:
   _revival: 0
   _destruction: 2
   _soulstone: 0
-  _reroll: 0
-  _skip: 0
+  _reroll: 2
+  _skip: 2
   _banish: 2
   _cooldown: 0
   _speed: 0
@@ -27,5 +27,8 @@ MonoBehaviour:
   _luck: 0
   _greed: 0
   _growth: 0
-  _abilitiesToAdd: []
-  _abilitiesToRemove: []
+  _abilitiesToAdd:
+  - {fileID: 228781238784315102, guid: 597da830a54c8cd4f8558986870ddad1, type: 3}
+  - {fileID: 9209867321953911855, guid: 3c1238aafa45e854e99a2180a5e53e41, type: 3}
+  - {fileID: 1677524110041029885, guid: f6739f30e0b46e54eb200affa55ea455, type: 3}
+  - {fileID: 2557051773488113581, guid: ce8f8c42da8e17d498eca513db9c6382, type: 3}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageAbility : Ability
+public class DamageAbility : AbilityBase
 {
     [Header("Damage")]
     [SerializeField] protected Collider2D _collider;
@@ -22,5 +22,9 @@ public class DamageAbility : Ability
         {
             damageable.Hit(_damageAmount, _isCriticalHit, _damageType);
         }
+    }
+    public override void CastAbility()
+    {
+        throw new System.NotImplementedException();
     }
 }

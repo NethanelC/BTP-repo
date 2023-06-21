@@ -9,35 +9,29 @@ using Cysharp.Threading.Tasks;
 public class AbilityButton : MonoBehaviour
 {
     [SerializeField] private Image _icon, _cooldownCoverImage;
-    [SerializeField] private TextMeshProUGUI _currentCooldown;
-    private float _cooldown, _timestampLastUsed;
-    private float _castDeltaTime => Time.time - _timestampLastUsed;
-    private bool _isOnCooldown => _castDeltaTime < _cooldown;
-    public void Init(Sprite iconSprite, float cooldown)
+    [SerializeField] private TextMeshProUGUI _currentCooldown, _bindingText;
+    public void Init(Sprite iconSprite)
     {
         _icon.sprite = iconSprite;
-        _cooldown = cooldown;
-        _timestampLastUsed = Time.time - _cooldown;
         gameObject.SetActive(true);
     }
-    public bool UseAbility()
+    public void UseAbility(bool isCastable, float cooldown)
     {
-        _icon.DOColor(Color.gray, 0.1f).SetEase(Ease.Linear).OnComplete(() => _icon.color = Color.white);
+        _icon.DOColor(Color.gray, .1f).SetEase(Ease.Linear).OnComplete(() => _icon.color = Color.white);
         _currentCooldown.gameObject.SetActive(true);
-        if (!_isOnCooldown)
+        if (isCastable)
         {
-            _timestampLastUsed = Time.time;
             _cooldownCoverImage.fillAmount = 1;
-            _cooldownCoverImage.DOFillAmount(0, _cooldown).SetEase(Ease.Linear).OnComplete(() => { _currentCooldown.gameObject.SetActive(false); });
-            UpdateCooldown();
-            return false;
+            _cooldownCoverImage.DOFillAmount(0, cooldown).SetEase(Ease.Linear).OnComplete(() => { _currentCooldown.gameObject.SetActive(false); });
+            UpdateCooldown(cooldown);
         }
-        return true;
     }
-    private async void UpdateCooldown()
+    private async void UpdateCooldown(float cooldown)
     {
-        _currentCooldown.text = Mathf.RoundToInt(_cooldown - (_castDeltaTime)).ToString();
-        await UniTask.Delay(1000);
-        UpdateCooldown();
+        for (int i = 0; i < cooldown; i++)
+        {
+            _currentCooldown.text = Mathf.RoundToInt(cooldown - i).ToString();
+            await UniTask.Delay(1000);
+        }
     }
 }

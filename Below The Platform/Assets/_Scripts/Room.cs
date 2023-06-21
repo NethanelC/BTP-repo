@@ -31,21 +31,21 @@ public abstract class Room : MonoBehaviour
         { new (true, true, false, true), 13 },
         { new (false, true, true, true), 14 }
     };
-    public const float _horizontalSize = 26, _verticalSize = 16;
-    protected static int _completedRooms;
-    public bool IsCompleted { get; private set; }
     private Minimap _miniMap;
-    private int _roomIndex;
+    protected static int _completedRooms;
+    public const float HorizontalSize = 26, VerticalSize = 16;
+    public int RoomIndex { get; private set; }
+    public bool IsCompleted { get; private set; }
     public void Init(int roomIndex, Minimap miniMap)
     {
-        _roomIndex = roomIndex;
+        RoomIndex = roomIndex;
         _miniMap = miniMap;
         _spriteRenderer.color = _color;
         SpawnInteractables();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _miniMap.ChangeCurrentRoom(_roomIndex, true);
+        _miniMap.ChangeCurrentRoom(RoomIndex, true);
         OnRoomChange?.Invoke(this);
         if (IsCompleted)
         {
@@ -61,28 +61,16 @@ public abstract class Room : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _miniMap.ChangeCurrentRoom(_roomIndex, false);
+        _miniMap.ChangeCurrentRoom(RoomIndex, false);
         _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
     }
     public void SetRoomLayout(bool4 roomLayout)
     {
         _spriteRenderer.sprite = _roomsInfo.RoomLayouts[_roomLayouts[roomLayout]].RoomSprite;
-        if (!roomLayout.x)
-        {
-            _doors[0].gameObject.SetActive(false);
-        }
-        if (!roomLayout.y)
-        {
-            _doors[1].gameObject.SetActive(false);
-        }
-        if (!roomLayout.z)
-        {
-            _doors[2].gameObject.SetActive(false);
-        }
-        if (!roomLayout.w)
-        {
-            _doors[3].gameObject.SetActive(false);
-        }
+        _doors[0].gameObject.SetActive(roomLayout.x);
+        _doors[1].gameObject.SetActive(roomLayout.y);
+        _doors[2].gameObject.SetActive(roomLayout.z);
+        _doors[3].gameObject.SetActive(roomLayout.w);
     }
     protected abstract void SpawnInteractables();
     public void CompleteRoom()

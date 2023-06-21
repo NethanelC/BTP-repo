@@ -12,8 +12,24 @@ public class PlayerExperience : MonoBehaviour
     [SerializeField] private Slider _progressSlider;
     [SerializeField] private TextMeshProUGUI _percentInText, _levelInText;
     [SerializeField] private ExperiencePopup _popup;
-    private int _currentLevel;
+    private int _currentLevel = 1;
     private float _currentExperience;
+    public float Experience
+    {
+        get { return _currentExperience; }
+        set
+        {
+            _currentExperience += value * PlayerStats.Instance.Growth;
+            var popUp = Instantiate(_popup, transform.position, Quaternion.identity).Init(value);
+            if (_currentExperience >= RequiredExperienceToLevelUp)
+            {
+                LevelUp();
+            }
+            float percent = _currentExperience / RequiredExperienceToLevelUp;
+            _progressSlider.value = percent;
+            _percentInText.text = $"{Mathf.Round(percent * 100)} %";
+        }
+    }
     public int RequiredExperienceToLevelUp => _currentLevel * 3;
     private void Awake()
     {
@@ -23,21 +39,9 @@ public class PlayerExperience : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(Instance);
         }
-        _levelInText.text = $"Lvl. {++_currentLevel}";
-    }
-    public void AcquireExperience(int expPoints)
-    {
-        _currentExperience += expPoints + (expPoints * PlayerStats.Instance.Growth);
-        var popUp = Instantiate(_popup,transform.position, Quaternion.identity).Init(expPoints);
-        if (_currentExperience >= RequiredExperienceToLevelUp)
-        {
-            LevelUp();
-        }
-        float percent = _currentExperience / RequiredExperienceToLevelUp;
-        _progressSlider.value = percent;
-        _percentInText.text = $"{Mathf.Round(percent * 100)} %";
+        _levelInText.text = $"Lvl. {_currentLevel}";
     }
     private void LevelUp()
     {

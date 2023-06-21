@@ -5,11 +5,9 @@ using UnityEngine;
 public class Character : ScriptableObject
 {
     [SerializeField] private int _health, _power, _armor, _revival, _destruction, _soulstone, _reroll, _skip, _banish;
-    [SerializeField] [Range(0, 1)]private float _cooldown, _speed, _moveSpeed, _luck, _greed, _growth;
-    [SerializeField] private List<Ability> _abilitiesToAdd = new();
-    [SerializeField] private List<Ability> _abilitiesToRemove = new();
-    public List<Ability> AbilitiesToAdd => _abilitiesToAdd;
-    public List<Ability> AbilitiesToRemove => _abilitiesToRemove;
+    [SerializeField] [Range(-1, 1)]private float _cooldown, _speed, _moveSpeed, _luck, _greed, _growth;
+    [SerializeField] private List<AbilityBase> _abilitiesToAdd = new();
+    public List<AbilityBase> AbilitiesToAdd => _abilitiesToAdd;
     public int Armor => _armor;
     public int Health => _health;
     public int Revivals => _revival;

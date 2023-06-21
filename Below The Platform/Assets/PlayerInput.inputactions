@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "3cd99649-efd1-48b9-b8b6-65950d1ce371",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "FirstAbility",
                     "type": "Button",
                     "id": "b53e7fe2-0fc2-440a-b0af-4efdb5ef00fa",
@@ -256,7 +265,7 @@
                 {
                     "name": "",
                     "id": "f692ea58-5513-4106-8fbf-d7f58ba37e1b",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -278,7 +287,7 @@
                 {
                     "name": "",
                     "id": "307f3b3a-c71b-4a23-8073-2f63547502b4",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -300,7 +309,7 @@
                 {
                     "name": "",
                     "id": "832b30c5-7e0a-4e7b-a6b1-7121b7d2289a",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -322,7 +331,7 @@
                 {
                     "name": "",
                     "id": "07e140c7-d520-4a77-a0e2-46e059600a4d",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -373,9 +382,37 @@
                     "action": "DashAbility",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76c2bf97-5ced-4ebe-be84-905384218157",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33fe80c9-b65c-4753-8a38-f9ee427486fa",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "New control scheme",
+            "bindingGroup": "New control scheme",
+            "devices": []
+        }
+    ]
 }

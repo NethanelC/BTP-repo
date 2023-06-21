@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
+    public static event Action OnRebinding;
     public event Action<Vector3> OnShootAction;
     public event Action OnPauseAction;
     public event Action OnDestructionAction;
@@ -24,54 +26,52 @@ public class GameInput : MonoBehaviour
         _playerInput.Player.FourthAbility.performed += FourthAbility_performed;
         _playerInput.Player.DestructionAbility.performed += DestructionAbility_performed;
         _playerInput.Player.DashAbility.performed += DashAbility_performed;
-        AbilitySelectMenu.OnMenuClosed += EnableInput;
     }
-    private void DashAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        OnDashAction?.Invoke();
-    }
-    private void DestructionAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        OnDestructionAction?.Invoke();
-    }
-    private void Start()
+    private void OnEnable()
     {
         PlayerExperience.Instance.OnLevelUp += DisableInput;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
-        PlayerExperience.Instance.OnLevelUp -= DisableInput;
-        AbilitySelectMenu.OnMenuClosed -= EnableInput;
+        PlayerExperience.Instance.OnLevelUp -= DisableInput;     
     }
-    private void DisableInput()
+    public void DisableInput()
     {
         _playerInput.Disable();
     }
-    private void EnableInput()
+    public void EnableInput()
     {
         _playerInput.Enable();
     }
-    private void FirstAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void DashAbility_performed(InputAction.CallbackContext obj)
+    {
+        OnDashAction?.Invoke();
+    }
+    private void DestructionAbility_performed(InputAction.CallbackContext obj)
+    {
+        OnDestructionAction?.Invoke();
+    }
+    private void FirstAbility_performed(InputAction.CallbackContext obj)
     {
         OnAbilityAction?.Invoke(0);
     }
-    private void SecondAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void SecondAbility_performed(InputAction.CallbackContext obj)
     {
         OnAbilityAction?.Invoke(1);
     }
-    private void ThirdAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void ThirdAbility_performed(InputAction.CallbackContext obj)
     {
         OnAbilityAction?.Invoke(2);
     }
-    private void FourthAbility_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void FourthAbility_performed(InputAction.CallbackContext obj)
     {
         OnAbilityAction?.Invoke(3);
     }
-    private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Pause_performed(InputAction.CallbackContext obj)
     {
         OnPauseAction?.Invoke();
     }
-    private void Shoot_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Shoot_performed(InputAction.CallbackContext obj)
     {
         OnShootAction?.Invoke(_camera.ScreenToWorldPoint(Input.mousePosition));
     }

@@ -2,27 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Cysharp.Threading.Tasks;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Bullet _bullet;
     [SerializeField] private GameInput _gameInput;
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+    [SerializeField] private Rigidbody2D _rb;
     private Transform _transform;
-    private float _speed = 8;
-    void Awake()
+    private float _baseSpeed = 6;
+    private float _speed;
+    private void Awake()
     {
-        _speed += _speed * PlayerStats.Instance.MoveSpeed;
-        _transform = transform;     
-        _gameInput.OnShootAction += Shoot;
-        Door.OnEnteredDoor += Door_OnEnteredDoor;
-        Room.OnRoomChange += Room_OnRoomChange;
+        _transform = transform;
     }
-    private void OnDestroy()
+    private void Start()
+    {
+        _baseSpeed *= PlayerStats.Instance.MoveSpeed;
+        _speed = _baseSpeed;
+    }
+    private void OnEnable()
+    {
+        _gameInput.OnShootAction += Shoot;
+        _gameInput.OnDashAction += Dash;
+        Door.OnEnteredDoor += Door_OnEnteredDoor;
+        Room.OnRoomChange += Room_OnRoomChange;      
+    }
+    private void OnDisable()
     {
         _gameInput.OnShootAction -= Shoot;
+        _gameInput.OnDashAction -= Dash;
         Door.OnEnteredDoor -= Door_OnEnteredDoor;
-        Room.OnRoomChange -= Room_OnRoomChange;
+        Room.OnRoomChange -= Room_OnRoomChange;       
+    }
+    private void Dash()
+    {
+        IncreaseSpeed(2, 150);
+    }
+    public async void IncreaseSpeed(float multiplier, int durationInMiliseconds)
+    {
+        _speed *= multiplier;
+        await UniTask.Delay(durationInMiliseconds);
+        _speed = _baseSpeed;
     }
     private void FixedUpdate()
     {
@@ -30,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Door_OnEnteredDoor(Vector2 position)
     {
-        transform.position += (Vector3)position;
+        _transform.position += (Vector3)position;
     }
     private void Room_OnRoomChange(Room room)
     {
@@ -38,6 +59,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Shoot(Vector3 mousePosition)
     {
-        Instantiate(_bullet, mousePosition, Quaternion.identity);
+        
     }
 }
